@@ -1,0 +1,27 @@
+Company Directory Design Memo
+
+Recursive insertion starts at the root of the team tree. The method compares
+the current employee's name with the manager's name. If they match, it checks
+the requested side. It adds a new EmployeeNode only when that position is
+empty. If the names do not match, the method searches the left branch and
+then the right branch. Each recursive call works on a smaller part of the
+tree. A return value tells earlier calls whether the manager was found.
+Finding a manager does not always mean an employee was added, because the
+requested position might already be occupied.
+
+One detail I had to handle was the meaning of None. It tells the first call
+to start at the root. Calling the method again with a missing child would
+restart the search, so the code only visits children that exist. Another
+detail was reporting a missing manager only after both branches had been
+searched. This avoids printing an error before checking the whole tree.
+
+I tested Jordan with Riley and Taylor underneath, and Morgan and Dana under
+Riley. The printed indentation matched the expected hierarchy. I also checked
+occupied positions, a missing manager, an invalid side, an empty tree, and
+insertion before creating a root. These checks confirmed that invalid actions
+leave the existing structure unchanged. The CLI also accepted an uppercase side.
+
+Trees are useful when information has levels and parent-child relationships,
+such as folders or reporting structures. A list is simpler for a sequence,
+and a dictionary is useful for looking up a value by a key. This binary tree
+shows relationships clearly, but it limits each manager to two direct reports.
